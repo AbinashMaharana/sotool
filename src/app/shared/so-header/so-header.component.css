@@ -1,0 +1,14 @@
+.bg-light {
+    background-color: #f8f7f7 !important;
+}
+
+.custom-btn{
+    text-decoration: none;
+    color: grey;
+    padding: 0px;
+}
+
+.custom-btn:focus {
+    outline: none;
+    box-shadow: none;
+  }

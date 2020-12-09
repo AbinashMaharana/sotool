@@ -1,0 +1,35 @@
+.border-none {
+    border: 0px;
+}
+
+.site-details {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.site-details>div:after {
+    content: "|";
+    margin: 0 10px;
+}
+
+.site-details>div:last-child:after {
+    content: '';
+    margin: 0 10px;
+}
+
+.site-address {
+    padding: 0.45rem 1.25rem !important;
+}
+
+.map-marker {
+    padding: 0px 10px;
+    font-size: 26px;
+    display: inline-block;
+    position: absolute;
+}
+
+.map-address {
+    display: inline-block;
+    margin-left: 30px;
+}

@@ -1,0 +1,40 @@
+<div [hidden]="!show" class="menu-wrapper">
+    <header>
+        <div class="pull-right text-white p-2"><span class="fa fa-thumb-tack"
+                [ngClass]="isPinned ? 'rotate-45' : 'rotate-reset'" aria-hidden="true" (click)="pinSubmenu();"></span>
+        </div>
+        <nav class="nav" role="navigation">
+            <ul class="nav__list">
+                <li *ngFor="let menulist of submenuList; let indexOfelement = index;">
+                    <input id="group-{{indexOfelement+1}}" type="checkbox" hidden />
+                    <label for="group-{{indexOfelement+1}}">
+                        <i class="text-danger fa fa-times-circle"></i>
+                        <span class="fa fa-caret-right"></span> {{menulist.displayName}} </label>
+                    <ul class="group-list" *ngIf="menulist.firstLevel.length > 0">
+                        <li *ngFor="let levelMenu of menulist?.firstLevel; let indexOfelement = index;"
+                            routerLink="{{levelMenu.route}}" [routerLinkActive]="['active']"
+                            [routerLinkActiveOptions]="{exact: true}" (click)="hideSubMenu(levelMenu.children);">
+                            <a *ngIf="!levelMenu.children"><i class="text-danger fa fa-times-circle"></i>
+                                {{levelMenu.displayName}}</a>
+                            <input *ngIf="levelMenu.children && levelMenu.children.length > 0"
+                                id="sub-group-{{indexOfelement+1}}" type="checkbox" hidden />
+                            <label *ngIf="levelMenu.children && levelMenu.children?.length > 0"
+                                for="sub-group-{{indexOfelement+1}}">
+                                <i class="text-danger fa fa-times-circle"></i>
+                                <span class="fa fa-caret-right"></span> {{levelMenu.displayName}}</label>
+
+                            <ul *ngIf="levelMenu.children && levelMenu.children.length > 0" class="sub-group-list">
+                                <li *ngFor="let secondLevel of levelMenu.children" routerLink="{{secondLevel.route}}"
+                                    [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"
+                                    (click)="hideSubMenu(levelMenu.children);"><a> <i
+                                            class="text-danger fa fa-times-circle"></i> {{secondLevel.displayName}}</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+</div>

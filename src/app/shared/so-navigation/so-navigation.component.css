@@ -1,0 +1,37 @@
+.left-menu {
+    max-width: 90px;
+    position: relative;
+    float: left;
+    height: calc(100vh - 58px);
+    flex: 10%;
+    background-color: #f1f1f1;
+}
+
+.bg-black {
+    background-color: #1a242d;
+}
+
+.menu-lists {
+    padding: 0px;
+}
+
+p {
+    margin: 0px !important;
+}
+
+.menu-lists>div>li {
+    color: #bbbcbe;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.menu-lists>div>li.active {
+    background-color: #1472bb;
+    color: #ffffff;
+}
