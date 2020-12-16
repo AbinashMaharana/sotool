@@ -1,0 +1,41 @@
+<form class="form-horizontal" [formGroup]="siteDetailsForm" novalidate>
+    <div class="form-group row">
+        <label class="control-label col-md-4" for="customer">Select Customer<sup class="text-danger">*</sup></label>
+        <div class="col-md-3">
+            <div class="input-group">
+                <input id="customerName" class="form-control input-sm" type="text" [formControlName]="'customerName'"
+                aria-label="Text input with dropdown button" (input)="isValidForm();" list="customers">  
+                <datalist id="customers">
+                  <option *ngFor="let customer of customersList" [value]="customer.cusotmerName"></option>
+                </datalist>                
+            </div>
+            <div>
+                <small class="form-text text-danger"
+                    *ngIf="formControls.customerName.touched && formControls.customerName.errors?.required">
+                    Please enter Customer!
+                </small>                
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-md-4" for="site name">Site Name<sup class="text-danger">*</sup></label>
+        <div class="col-md-3">
+            <input id="siteName" class="form-control input-sm" type="text" [formControlName]="'siteName'"
+                (input)="validateSiteName(formControls.customerName.value);isValidForm();"/>
+            <div>
+                <small class="form-text text-danger"
+                    *ngIf="formControls.siteName.touched && formControls.siteName.errors?.required">
+                    Please enter Site Name!
+                </small>
+                <small class="form-text text-danger"
+                *ngIf="isDuplicate && formControls.siteName.value">
+                Site Name given already exists for this customer !
+            </small>
+            </div>
+        </div>
+
+    </div>
+
+</form>

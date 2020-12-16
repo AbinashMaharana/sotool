@@ -1,0 +1,13 @@
+<div class="left-menu bg-black">
+    <ul class="menu-lists">
+        <div *ngFor="let menuData of mainNavMenuList">
+            <li routerLink="{{menuData.route}}" [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{exact: true}" (mouseenter)="toggleMenu(menuData?.submenu);">
+                <a>
+                    <span><i [className]="'fa fa-' + menuData?.iconName"></i></span>
+                    <p>{{menuData.displayName}}</p>
+                </a>
+            </li>
+        </div>
+    </ul>
+</div>
