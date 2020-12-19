@@ -1,0 +1,22 @@
+{
+    "routes": {
+        "dashboard":{
+            "prevRoutePath":"",
+            "nextRoutePath":"/venue_planning/venue_details",
+            "prevBtnLabel":"",
+            "nextBtnLabel":"Venue Details"
+        },
+        "venue_details": {
+            "prevRoutePath":"/dashboard",
+            "nextRoutePath":"/venue_planning/import_files",
+            "prevBtnLabel":"Dashboard",
+            "nextBtnLabel":"Import Input Files"
+        },       
+        "import_files": {
+            "prevRoutePath":"/venue_planning/venue_details",
+            "nextRoutePath":"",
+            "prevBtnLabel":"Venue Details",
+            "nextBtnLabel":"Venue Configurations"
+        }
+    }
+}
