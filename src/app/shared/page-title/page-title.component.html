@@ -1,30 +1,30 @@
-<div class="card bg-transparent justify-content-between border-none">
-    <div class="card-header">
+<div class="card bg-white justify-content-between border-none page-details" [ngClass]="{'custom-width' : isSideMenuVisible}">
+    <div class="card-header custom-header">
         <div class="row">
             <div class="col-md-10 col-xs-12">
                 <app-breadcrumb></app-breadcrumb>
             </div>
             <div class="col-md-2 col-xs-12">
-                <button class="pull-right btn btn-sm btn-primary col-12" (click)="addNewSite()">Add New Site</button>
+                <button class="pull-right btn btn-sm btn-primary col-12" [hidden]="showVenueBtn" (click)="addNewVenue()">Add New Venue</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="card bg-transparent border-none" [hidden]="true">
-    <div class="card-header">
+<div class="card bg-white border-none customer-details" [hidden]="showVenueDetail" [ngClass]="{'custom-width' : isSideMenuVisible}">
+    <div class="card-header custom-header">
         <div class="row site-details">
             <div class="col-md-2 col-xs-12">
-                <label>Customer: </label> <b> {{siteDetails.customer}}</b>
+                <label>Customer: </label> <b> {{venueDetails.customer}}</b>
             </div>
             <div class="col-md-3 col-xs-12">
-                <label>Site Name: </label> <b> {{siteDetails.siteName}}</b>
+                <label>Site Name: </label> <b> {{venueDetails.venueName}}</b>
             </div>
             <div class="col-md-7 col-xs-12">
                 <label>Location: </label>
                     <span class="fa fa-map-marker text-primary map-marker">
                     </span>
-                    <span class="map-address">{{siteDetails.location}}</span>
+                    <span class="map-address">{{venueDetails.location}}</span>
             </div>
         </div>
     </div>

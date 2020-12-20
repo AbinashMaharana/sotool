@@ -17,14 +17,24 @@
                         Please enter Username!
                     </small>
                 </div>
-                <div class="form-group">
+                <div>
                     <label>Password</label>
-                    <input id="password" class="form-control" type="password" [formControlName]="'password'" />
+                </div>
+                <div class="input-group">
+
+                    <input class="form-control border-right-0" id="password" [type]="inputType"
+                        [formControlName]="'password'">
+                    <span class="input-group-append bg-white" (click)="showHidePassword()">
+                        <button class="btn border border-left-0" type="button" disabled><i [class]="classIcon"
+                                aria-hidden="true"></i></button>
+                    </span>
+
+                </div>
+                <div>
                     <small class="form-text text-danger"
                         *ngIf="formControls.password.touched && formControls.password.errors?.required">
                         Please enter Password!
-                    </small>
-                </div>
+                    </small></div>
                 <small class="form-text text-center text-danger">
                     <b>{{errorMsg}}</b>
                 </small>

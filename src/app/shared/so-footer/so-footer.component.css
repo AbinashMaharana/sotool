@@ -1,4 +1,11 @@
 .custom-footer{
-    left:80px;
-    bottom:30px;
+   margin-bottom: 30px;
+   position: fixed;
+   float: left;
+   width: 94.1%;
+   bottom: 0px;
+}
+
+.custom-width{
+   width: 82.1%;
 }

@@ -1,8 +1,16 @@
+.layout-header {
+    height: 40px;
+}
+
+.layout-header>a {
+    padding-top: 0px;
+}
+
 .bg-light {
     background-color: #f8f7f7 !important;
 }
 
-.custom-btn{
+.custom-btn {
     text-decoration: none;
     color: grey;
     padding: 0px;
@@ -11,4 +19,4 @@
 .custom-btn:focus {
     outline: none;
     box-shadow: none;
-  }
+}

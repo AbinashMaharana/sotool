@@ -1,6 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+import { SideMenuService } from 'src/app/helper/sidemenu.service';
 import { SidebarService } from '../../helper/sidebar.service';
+declare const require: any;
 
 @Component({
   selector: 'so-sidemenu',
@@ -12,137 +16,185 @@ export class SoSidemenuComponent implements OnInit {
   show: boolean;
   submenuList: any;
   isPinned: boolean;
+  showSideMenu: boolean;
+  currentPage: number;
 
-  constructor(private sidebarService: SidebarService) {
-    this.sideMenuSubscription = sidebarService.getPinStatus.subscribe(event => {
-      this.isPinned = event
-    });
-    this.sideMenuSubscription = sidebarService.getStatus.subscribe(event => {
+  constructor(private translate: TranslateService, private ss: SidebarService, private sm: SideMenuService, private route:ActivatedRoute,private router:Router) {
+
+    ss.getStatus.subscribe(event => {
       this.show = event;
+      this.showSideMenu = this.show;
+      console.log(event);
     });
 
+    sm.getCurrentPage.subscribe(event => {
+      this.currentPage = event;
+    });
+
+    translate.setTranslation('en', require('../../../assets/i18n/en.json'));
+    translate.setDefaultLang('en');
+    translate.use('en');
   }
 
   ngOnInit(): void {
 
     this.submenuList = [{
-      displayName: 'Site Requirements',
+      page: 1,
+      displayName: 'Venue Details',
       iconName: 'globe',
-      route: '/site_requirements',
+      route: '/venue_planning/venue_details',
       submenu: false,
       status: 'done',
-      firstLevel: [
-        {
-          displayName: 'Site Details',
-          iconName: 'globe',
-          route: '/site_planning/site_requirement/site_details',
-          status: 'done'
-        },
-        {
-          displayName: 'Bill of Materials',
-          iconName: 'globe',
-          route: '/site_planning/site_requirement/bom',
-          status: 'done'
-        },
-        {
-          displayName: 'CIQ and Radio Units',
-          iconName: 'globe',
-          route: '/site_planning/site_requirement/ciq_ru_details',
-          status: 'done'
-        }
-      ]
+      disabled: false,
+      firstLevel: []
     },
     {
-      displayName: 'Site Configuration',
+      page: 2,
+      displayName: 'Import Input Files',
       iconName: 'globe',
-      route: '/site_configuration',
+      route: '/venue_planning/import_files',
+      submenu: false,
+      status: 'done',
+      disabled: false,
+      firstLevel: []
+    },
+    {
+      page: 3,
+      displayName: 'Venue Configuration',
+      iconName: 'globe',
+      route: '/venue_planning/venue_configuration',
       submenu: true,
       status: 'done',
+      disabled: false,
       firstLevel: [
         {
-          displayName: 'VNF Manager',
+          displayName: 'gNodeB1',
           iconName: 'globe',
-          route: '/site_planning/site_configuration/vnf_manager',
+          route: '/venue_planning/venue_configuration/gNodeB/1',
+          status: 'done',
           children: [
-            {
-              displayName: 'Summary and Export',
-              iconName: 'globe',
-              route: '/site_planning/site_configuration/vnf_manager/summary_export',
-              status: 'done'
-            }
-          ]
-        },
-        {
-          displayName: 'gNodeB',
-          iconName: 'globe',
-          route: '/site_planning/site_configuration/gNodeB',
-          children: [
-            {
-              displayName: 'Service Configuration',
-              iconName: 'globe',
-              route: '/site_planning/site_configuration/gNodeB/service_config',
-              status: 'done'
-            },
-            {
-              displayName: 'Radio Configuration',
-              iconName: 'globe',
-              route: '/site_planning/site_configuration/gNodeB/radio_config',
-              status: 'done'
-            },
             {
               displayName: 'CUCP Configuration',
               iconName: 'globe',
-              route: '/site_planning/site_configuration/gNodeB/cucp_config',
+              route: '/venue_planning/venue_configuration/gNodeB/1/cucp_config',
               status: 'done'
             },
             {
               displayName: 'CUUP Configuration',
               iconName: 'globe',
-              route: '/site_planning/site_configuration/gNodeB/cuup_config',
+              route: '/venue_planning/venue_configuration/gNodeB/1/cuup_config',
               status: 'done'
             },
             {
               displayName: 'DU Configuration',
               iconName: 'globe',
-              route: '/site_planning/site_configuration/gNodeB/du_config',
+              route: '/venue_planning/venue_configuration/gNodeB/1/du_config',
+              status: 'done'
+            },
+            {
+              displayName: 'Radio Unit',
+              iconName: 'globe',
+              route: '/venue_planning/venue_configuration/gNodeB/1/radio_units',
               status: 'done'
             }
           ]
         },
         {
-          displayName: 'Edge Cloud',
+          displayName: 'gNodeB Network Configuration',
           iconName: 'globe',
-          route: '/site_planning/site_configuration/edge_cloud',
+          route: '/venue_planning/venue_configuration/edge_cloud',
           submenu: false,
           status: 'done',
-          children: [
-            {
-              displayName: 'Summary and Export',
-              iconName: 'globe',
-              route: '/site_planning/site_configuration/edge_cloud/export',
-              status: 'done'
-            }
-          ]
+          disabled: false,
+          firstLevel: []
+        },
+        {
+          displayName: 'Edge Cloud',
+          iconName: 'globe',
+          route: '/venue_planning/venue_configuration/edge_cloud',
+          submenu: false,
+          status: 'done',
+          disabled: false,
+          firstLevel: []
+        },
+        {
+          displayName: 'Summary and Export',
+          iconName: 'globe',
+          route: '/venue_planning/venue_configuration/edge_cloud',
+          submenu: false,
+          status: 'done',
+          disabled: false,
+          firstLevel: []
         }
       ]
     }
     ];
   }
 
-  hideSubMenu(subMenu) {
-    if (subMenu && subMenu.length > 0) {
-      this.sidebarService.setStatus = true;
-    } else {
-      this.sidebarService.setStatus = false;
+  getAllgNodeBConfig() {
+    let obj = {
+      displayName: 'gNodeB',
+      iconName: 'globe',
+      route: '/venue_planning/venue_configuration/gNodeB',
+      children: [
+        {
+          displayName: 'gNodeB1',
+          iconName: 'globe',
+          route: '/venue_planning/venue_configuration/gNodeB',
+          subChildren: [
+            {
+              displayName: 'Service Configuration',
+              iconName: 'globe',
+              route: '/venue_planning/venue_configuration/gNodeB/service_config',
+              status: 'done'
+            }
+            // {
+            //   displayName: 'Radio Configuration',
+            //   iconName: 'globe',
+            //   route: '/venue_planning/venue_configuration/gNodeB/radio_config',
+            //   status: 'done'
+            // },
+            // {
+            //   displayName: 'CUCP Configuration',
+            //   iconName: 'globe',
+            //   route: '/venue_planning/venue_configuration/gNodeB/cucp_config',
+            //   status: 'done'
+            // },
+            // {
+            //   displayName: 'CUUP Configuration',
+            //   iconName: 'globe',
+            //   route: '/venue_planning/venue_configuration/gNodeB/cuup_config',
+            //   status: 'done'
+            // },
+            // {
+            //   displayName: 'DU Configuration',
+            //   iconName: 'globe',
+            //   route: '/venue_planning/venue_configuration/gNodeB/du_config',
+            //   status: 'done'
+            // }
+          ]
+        },
+
+      ]
     }
-  }
-  pinSubmenu() {
-    this.isPinned = !this.isPinned;
-    this.sidebarService.setPinStattus = this.isPinned;
+    return obj;
   }
 
-  ngOnDestroy() {
-    this.sideMenuSubscription.unsubscribe();
+  hideSubMenu(subMenu) {
+    if (subMenu && subMenu.length > 0) {
+      this.ss.setStatus = true;
+    } else {
+      this.ss.setStatus = false;
+    }
+  }
+
+  showMenu() {
+    this.ss.setStatus = true;
+    this.showSideMenu = true;
+  }
+  hideMenu() {
+    this.ss.setStatus = false;
+    this.showSideMenu = false;
   }
 
 }

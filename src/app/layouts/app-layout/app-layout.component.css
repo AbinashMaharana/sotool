@@ -1,14 +1,15 @@
 .flex-row {
     display: flex;
-    margin-top: 3.5rem !important;
+    /* margin-top: 3.5rem !important; */
 }
 
 main.so-wrpper {
     flex: 90%;
-    background-color: #d7d7d7a3;
+    background-color: #ffffff;
     overflow-y: auto;
 }
 
-.content{
+.content {
     padding: 15px;
+    margin-top: 110px;
 }

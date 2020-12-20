@@ -1,11 +1,12 @@
 <div class="left-menu bg-black">
     <ul class="menu-lists">
-        <div *ngFor="let menuData of mainNavMenuList">
-            <li routerLink="{{menuData.route}}" [routerLinkActive]="['active']"
-                [routerLinkActiveOptions]="{exact: true}" (mouseenter)="toggleMenu(menuData?.submenu);">
+        <div class="test" *ngFor="let menuInfo of mainNavMenuList; let i = index"
+            [ngClass]="{'active': menuInfo.isActive}">
+            <li routerLink="{{menuInfo.route}}" [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{exact: true}" (mouseenter)="toggleMenu(menuInfo?.submenu);">
                 <a>
-                    <span><i [className]="'fa fa-' + menuData?.iconName"></i></span>
-                    <p>{{menuData.displayName}}</p>
+                    <span><i [className]="'fa fa-' + menuInfo?.iconName"></i></span>
+                    <p>{{menuInfo.displayName}}</p>
                 </a>
             </li>
         </div>

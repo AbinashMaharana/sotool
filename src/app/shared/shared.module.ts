@@ -3,12 +3,17 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule } from '@angular/router';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { NgxSpinnerModule } from "ngx-spinner";
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { BasicAuthHtppInterceptor } from '../helper/basic-auth-http-interceptor';
 
 import { SpinnerService } from '../shared/spinner/spinner.service';
 import { SidebarService } from '../helper/sidebar.service';
+
+import { TanslateSharedLazyLoadedModule } from './translateSharedLazy.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoginHeaderComponent } from './login-header/login-header.component';
 import { SoHeaderComponent } from './so-header/so-header.component';
@@ -18,8 +23,9 @@ import { SoNavigationComponent } from './so-navigation/so-navigation.component';
 import { PageTitleComponent } from './page-title/page-title.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { SoSidemenuComponent } from './so-sidemenu/so-sidemenu.component';
-
-
+import {ImportFileComponent} from './import-file/import-file.component';
+import { ActiveDirective } from '../directives/active.directive';
+import { VenueConfigurationComponent } from '../venue-planning/venue-configuration/venue-configuration.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -31,7 +37,10 @@ import { SoSidemenuComponent } from './so-sidemenu/so-sidemenu.component';
     SpinnerComponent,
     PageTitleComponent,
     BreadcrumbComponent,
-    SoSidemenuComponent
+    SoSidemenuComponent,
+    ImportFileComponent,
+    ActiveDirective,
+    VenueConfigurationComponent
   ],
   exports: [
     LoginHeaderComponent,
@@ -42,13 +51,26 @@ import { SoSidemenuComponent } from './so-sidemenu/so-sidemenu.component';
     SpinnerComponent,
     BreadcrumbComponent,
     SoSidemenuComponent,
-    NgxSpinnerModule
+    ImportFileComponent,
+    NgxSpinnerModule,
+    TanslateSharedLazyLoadedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    FileUploadModule,
+    ActiveDirective,
+    VenueConfigurationComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    TanslateSharedLazyLoadedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    FileUploadModule
   ],
   providers: [
     SpinnerService,

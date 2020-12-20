@@ -1,4 +1,4 @@
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
@@ -12,17 +12,14 @@ export class SidebarService {
 
   private sidebarStatus: BehaviorSubject<boolean> = new BehaviorSubject(false);
   private pinningStatus: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  
+
   constructor() { }
 
-  set setPinStattus(pinStatus) {
-    // console.log("pinStatus");
-    // console.log(pinStatus);
+  set setPinStatus(pinStatus) {
     this.pinningStatus.next(pinStatus)
   }
 
   set setStatus(status: boolean) {
-    // console.log(status);
     this.sidebarStatus.next(status);
   }
 
@@ -33,4 +30,5 @@ export class SidebarService {
   get getStatus(): Observable<boolean> {
     return this.sidebarStatus.asObservable();
   }
+
 }

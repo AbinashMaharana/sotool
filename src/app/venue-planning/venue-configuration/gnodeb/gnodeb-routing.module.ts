@@ -16,7 +16,7 @@ const routes: Routes = [
           import('./cucp-config/cucp-config.module').then(
             (m) => m.CucpConfigModule
           ),
-        data: { title: 'CUCP Configuration' },
+        data: { title: 'CUCP Configuration' }
       },
       {
         path: 'cuup_config',

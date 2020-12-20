@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '../authentication/auth.service';
 import { SpinnerService } from '../shared/spinner/spinner.service';
-import { User } from '../models/user';
+
 
 @Component({
   selector: 'app-login',
@@ -13,8 +13,11 @@ import { User } from '../models/user';
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
-  public isSubmitted = false;
+  public togglePwd = false;
   public errorMsg: string = '';
+  public pwdLinktxt: string = 'Show Password';
+  public inputType = "password";
+  public classIcon: string;
 
   constructor(private spinner: SpinnerService, private readonly fb: FormBuilder, private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
 
@@ -23,6 +26,7 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.classIcon = 'fa fa-eye';
   }
 
   get formControls() { return this.loginForm.controls; }
@@ -56,6 +60,19 @@ export class LoginComponent implements OnInit {
     //   }
     // });
 
+  }
+
+  showHidePassword() {
+    this.togglePwd = !this.togglePwd;
+    if (!this.togglePwd) {
+      this.pwdLinktxt = 'Hide Password';
+      this.inputType = "text";
+      this.classIcon = 'fa fa-eye-slash';
+    } else {
+      this.pwdLinktxt = 'Show Password';
+      this.inputType = "password";
+      this.classIcon = 'fa fa-eye';
+    }
   }
 
   showSpinner() {

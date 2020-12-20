@@ -4,5 +4,6 @@ export interface NavItem {
     iconName: string;
     route?: string;
     submenu?:boolean;
+    isActive?:boolean;
     children?: NavItem[];
   }
