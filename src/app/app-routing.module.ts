@@ -15,9 +15,9 @@ const routes: Routes = [
   { path: 'venue_planning', component: AppLayoutComponent, children: VENUE_PLANNER_ROUTES, data: { title: 'Venue Planning' }},
   { path: '**', component: PageNotFoundComponent }
 ];
-const config = {useHash:true,enableTracing:true};
+// const config = {useHash:true,enableTracing:true};
 @NgModule({
-  imports: [RouterModule.forRoot(routes, config)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

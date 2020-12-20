@@ -11,6 +11,22 @@ const routes: Routes = [
     component: GnodebComponent,
     children: [
       {
+        path: 'cuup_config',
+        loadChildren: () =>
+        import('./cuup-config/cuup-config.module').then(
+          (m) => m.CuupConfigModule
+        ),
+        data: { title: 'CUUP Configuration' },
+      },
+      {
+        path: 'du_config',
+        loadChildren: () =>
+        import('./cucp-config/cucp-config.module').then(
+          (m) => m.CucpConfigModule
+        ),
+        data: { title: 'DU Configuration' },
+      },
+      {
         path: 'cucp_config',
         loadChildren: () =>
           import('./cucp-config/cucp-config.module').then(
@@ -19,25 +35,8 @@ const routes: Routes = [
         data: { title: 'CUCP Configuration' }
       },
       {
-        path: 'cuup_config',
-        loadChildren: () =>
-        import('./cucp-config/cucp-config.module').then(
-          (m) => m.CucpConfigModule
-        ),
-        data: { title: 'CUCP Configuration' },
-      },
-      {
-        path: 'du_config',
-        loadChildren: () =>
-        import('./cucp-config/cucp-config.module').then(
-          (m) => m.CucpConfigModule
-        ),
-        data: { title: 'CUCP Configuration' },
-      },
-      {
         path: '',
         redirectTo: 'cucp_config',
-        pathMatch: 'full',
       },
     ],
     data: { title: 'gNodeB' },

@@ -6,16 +6,14 @@
             </div>
             <nav class="nav" role="navigation">
                 <ul class="nav__list">
-                    <li *ngFor="let menulist of submenuList; let indexOfelement = index;" [class.disabled]="menulist.disabled" [class.unDisable]="currentPage == menulist.page || currentPage > menulist.page"  routerLink="{{menulist.route}}" [routerLinkActive]="['active']"
-                    [routerLinkActiveOptions]="{exact: true}" (click)="hideSubMenu(menulist?.firstLevel);">
+                    <li *ngFor="let menulist of submenuList; let indexOfelement = index;" [class.disabled]="menulist.disabled" [class.unDisable]="currentPage == menulist.page || currentPage > menulist.page" (click)="hideSubMenu(menulist?.firstLevel);">
                         <input id="group-{{indexOfelement+1}}" type="checkbox" hidden />
                         <label for="group-{{indexOfelement+1}}">
                             <i class="text-danger fa fa-times-circle"></i>
                             <span class="fa fa-caret-right" *ngIf="menulist?.firstLevel.length > 0"></span> {{menulist.displayName}} </label>
                         <ul class="group-list" *ngIf="menulist.firstLevel.length > 0">
                             <li *ngFor="let levelMenu of menulist?.firstLevel; let indexOfelement = index;"
-                                routerLink="{{levelMenu.route}}" [routerLinkActive]="['active']"
-                                [routerLinkActiveOptions]="{exact: true}" (click)="hideSubMenu(levelMenu.children);">
+                                 (click)="hideSubMenu(levelMenu.children);">
                                 <a *ngIf="!levelMenu.children"><i class="text-danger fa fa-times-circle"></i>
                                     {{levelMenu.displayName}}</a>
                                 <input *ngIf="levelMenu.children && levelMenu.children.length > 0"
